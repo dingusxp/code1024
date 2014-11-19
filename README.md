@@ -30,11 +30,14 @@ int r, int g, int b, int/float alpha， 对应颜色的 RGBA 分量，类型和�
 代码总字符数不能超过 1024 个；
 
 
-### tpl 提交规范：
+### 模版规范：
 
 **命名：**
 
-[语言]-[绘图方式]，如 PHP-gd， JS-canvas
+暂时只允许单文件，放置在 /tpl/ 目录下；
+
+名称格式 “[语言]-[绘图方式]”，后缀视语言定。 如 PHP-gd.php， JS-canvas.html
+
 
 **功能：**
 
@@ -42,3 +45,7 @@ int r, int g, int b, int/float alpha， 对应颜色的 RGBA 分量，类型和�
 
 调用 get_color_at(x, y) 函数，获取每一个像素点的 RGBA 颜色，在一个 1024*1024 的画布上画出图案。
 
+
+### 绘图代码提交和展示：
+
+http://code1024.sinaapp.com/
