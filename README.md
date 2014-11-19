@@ -13,13 +13,13 @@ http://codegolf.stackexchange.com/questions/35569/tweetable-mathematical-art
 
 **目标：**
 
-通过实现 模版（/tpl/*） 中的一个函数 get_color_at(x, y) ，在一个 1024x1024 的画布上画出尽可能 “有意思” 的图案。
+通过实现 模版（见 /tpl 目录） 中的一个函数 get_color_at(x, y) ，在一个 1024x1024 的画布上画出尽可能 “有意思” 的图案。
 
 **参数：**
 
 int x,  int y ，取值均为 0 - 1023，对应画布上坐标点，左上角为起始点 (0,0)
 
-**输出：**
+**返回：**
 
 int r, int g, int b, int/float alpha， 对应颜色的 RGBA 分量，类型和取值，具体根据各语言的 模版 见机行事。
 
