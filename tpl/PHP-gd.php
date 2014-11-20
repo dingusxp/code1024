@@ -22,7 +22,7 @@ for ($x = 0; $x < $width; $x++) {
 /*
 // save file
 */
-$imageFile = dirname(__FILE__).'/code1024.jpeg';
+$imageFile = dirname(__FILE__).'/code1024.jpg';
 imagejpeg($im, $imageFile, 90);
 echo 'image saved: ', $imageFile, PHP_EOL;
 
