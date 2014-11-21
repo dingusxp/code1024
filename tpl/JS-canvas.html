@@ -19,7 +19,9 @@
 	for (x = 0; x < width; x++){
 	    for (y = 0; y < height; y++){
 		    rgb = get_color_at(x, y);
-		    context.fillStyle = "rgba(" + [rgb[0], rgb[1], rgb[2], rgb[3]].join(',') + ")";
+		    context.fillStyle = "rgba("
+						+ [rgb[0]&255, rgb[1]&255, rgb[2]&255, 1-rgb[3]/255].join(',')
+						+ ")";
 			context.fillRect(x, y, 1, 1);
 	    }
 	}
@@ -28,17 +30,17 @@
 	 * 获取指定点的颜色值： r,g,b,alpha
 	 * 坐标范围： (0, 0) => (1023, 1023)
 	 * 颜色值范围：均为 0 - 255
- 	 * 透明度： 0 - 1， 值越小越透明
+ 	 * 透明度： 0 - 255， 值越大越透明
 	 */
 	function get_color_at(x, y) {
-	    var r = 0, g = 0, b = 0, a = 1;
+	    var r = 0, g = 0, b = 0, a = 0;
 
 		// {{code start}}
 		// your code here
 
 		// {{code end}}
 
-		return [r&255, g&255, b&255, Math.max(0, Math.min(1, a))];
+		return [r, g, b, a];
 	}
 //-->
 </script>

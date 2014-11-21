@@ -21,7 +21,9 @@ int x,  int y ，取值均为 0 - 1023，对应画布上坐标点，左上角为
 
 **返回：**
 
-int r, int g, int b, int/float alpha， 对应颜色的 RGBA 分量，类型和取值，具体根据各语言的 模版 见机行事。
+int r, int g, int b, int alpha， 对应颜色的 RGBA 分量，均为 0 - 255。
+
+注意：各语言中 alpha 分量定义可能不同，由 模版 统一转换为： 0 - 255，值越大越透明。
 
 **要求：**
 
