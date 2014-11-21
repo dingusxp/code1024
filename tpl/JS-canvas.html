@@ -38,7 +38,7 @@
 
 		// {{code end}}
 
-		return [r, g, b, a];
+		return [r&255, g&255, b&255, Math.max(0, Math.min(1, a))];
 	}
 //-->
 </script>

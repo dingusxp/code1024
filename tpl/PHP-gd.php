@@ -36,7 +36,7 @@ imagejpeg($im, null, 90);
  * 获取指定点的颜色值： r,g,b,alpha
  * 坐标范围： (0, 0) => (1023, 1023)
  * 颜色值范围：均为 0 - 255
- * 透明度： 0 - 255， 值越大越透明
+ * 透明度： 0 - 127， 值越大越透明
  */
 function get_color_at($x, $y) {
 	$r = $g = $b = $a = 0;
@@ -46,5 +46,5 @@ function get_color_at($x, $y) {
 
 	// {{code end}}
 
-	return array($r, $g, $b, $a);
+	return array($r&255, $g&255, $b&255, $a&127);
 }
