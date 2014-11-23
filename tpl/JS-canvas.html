@@ -15,16 +15,18 @@
 	var context = canvas.getContext("2d");
 	context.fillRect(0, 0, width, height);
 
-    var rgb;
-	for (x = 0; x < width; x++){
-	    for (y = 0; y < height; y++){
-		    rgb = get_color_at(x, y);
-		    context.fillStyle = "rgba("
-						+ [rgb[0]&255, rgb[1]&255, rgb[2]&255, 1-rgb[3]/255].join(',')
-						+ ")";
-			context.fillRect(x, y, 1, 1);
-	    }
+	var imgData = context.getImageData(0, 0, width, height);
+	var rgb, idx = 0;
+	for (y = 0; y < height; y++){
+		for (x = 0; x < width; x++){
+			rgb = get_color_at(x, y);
+			imgData.data[idx++] = rgb[0]&255;
+			imgData.data[idx++] = rgb[1]&255;
+			imgData.data[idx++] = rgb[2]&255;
+			imgData.data[idx++] = parseInt(255*(1-rgb[3]/255));
+		}
 	}
+	context.putImageData(imgData, 0, 0);
 
 	/**
 	 * 获取指定点的颜色值： r,g,b,alpha
