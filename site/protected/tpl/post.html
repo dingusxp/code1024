@@ -1,0 +1,157 @@
+
+<link rel="stylesheet" href="/static/libs/jqupload/css/jquery.fileupload.css" />
+
+<!-- content -->
+<div class="wrapper row3">
+  <div id="container">
+    <!-- ################################################################################################ -->
+    <div id="contact" class="clear">
+      <div class="one_half first">
+        <div id="respond">
+          <h2>发布代码</h2>
+          <form class="rnd5" action="#" method="post">
+            <div class="form-input clear">
+              <label class="one_half first" for="author">您的昵称 <span class="required">*</span><br>
+                  <input type="text" name="author" id="author" maxlength="30">
+              </label>
+              <label class="one_half" for="email">邮箱 <span></span><br>
+                <input type="text" name="email" id="email" maxlength="128">
+              </label>
+            </div>
+            <div class="form-input clear">
+              <label class="full_width" for="title">作品名称 <span class="required">*</span><br>
+                <input type="text" name="title" id="title" value="" maxlength="64">
+              </label>
+            </div>
+            <div class="form-input clear">
+              <label class="full_width" for="tpl">模版和代码 <span class="required">*</span><br>
+                <select id="tpl" name="tpl">
+                    <option value="">请选择</option>
+                    <?php foreach ($postTplCfg as $tpl => $cfg) { ?>
+                    <option value="<?php echo $tpl;?>"><?php echo $cfg['name'];?></option>
+                    <?php } ?>
+                </select>
+              </label>
+            </div>
+            <div class="form-message clear">
+                <textarea name="code" id="code" cols="60" rows="10" maxlength="1024"></textarea>
+            </div>
+            <div class="form-input clear">
+              <label class="full_width" for="pic">效果图（请等待图片自动上传结束后再提交） <span class="required">*</span><br>
+                <input type="file" name="pic" id="pic" />
+              </label>
+              <input type="hidden" name="pic_id" id="pic_id" value="" />
+              <div id="progress_bar"></div>
+              <p id="preview"></p>
+            </div>
+            <div class="form-input clear">
+                <p>
+                  <input type="hidden" name="formHash" id="formHash" value="<?php echo $formHash;?>" />
+                  <input type="button" id="postSubmit" value="提交" />
+				  <span id="submit-tips"></span>
+                </p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="one_half">
+        <section class="contact_details clear">
+          <h2>投递说明</h2>
+          <p>
+              选择使用的模版，并提交 <strong>自己实现</strong> 的那部分代码即可，<br />
+              也即是模板中get_color_at(x, y) 方法中，{{code start}} 与 {{code end}} 之间的代码。
+          </p>
+          <p>
+              更多信息，请参考 github 地址：<br />
+              <a href="https://github.com/dingusxp/code1024" title="code1024" target="_blank">https://github.com/dingusxp/code1024</a>
+          </p>
+        </section>
+        <section class="contact_details clear">
+          <h2>模版下载</h2>
+          <ul>
+              <?php foreach ($postTplCfg as $tpl => $cfg) { ?>
+              <?php if (!empty($cfg['download_tpl'])) { ?>
+              <li>
+                  <a href="/download?tpl=<?php echo $tpl;?>" target="_blank"><?php echo $cfg['name'];?></a>
+                  <?php if (!empty($cfg['online_trial'])) { ?>
+                  <span>&nbsp;|&nbsp;</span>
+                  <a href="<?php echo $cfg['online_trial'];?>" target="_blank">在线尝试</a>
+                  <?php } ?>
+              </li>
+              <?php } ?>
+              <?php } ?>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <div class="clear"></div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/static/libs/jqupload/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/static/libs/jqupload/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="/static/libs/jqupload/js/jquery.fileupload.js"></script>
+<script type="text/javascript">
+jQuery(function () {
+    jQuery('#pic').fileupload({
+        url: '/upload',
+        dataType: 'json',
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        maxFileSize: 2000000, // 2 MB
+        done: function (e, data) {
+            var ret = data.result;
+            if (ret.errno > 0) {
+                alert(ret.errmsg);
+                return false;
+            }
+            jQuery('#pic_id').val(ret.result.pic_id);
+            jQuery('#progress_bar').css({
+                width: 0,
+                height: 0
+            });
+            jQuery('#preview').html('<img src="' + ret.result.preview_url + '" width="80" alt="preview" />');
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            jQuery('#progress_bar').css({
+                width: progress + '%',
+                height: '10px',
+                backgroundColor: '#999'
+            });
+        }
+    }).prop('disabled', !jQuery.support.fileInput)
+        .parent().addClass(jQuery.support.fileInput ? undefined : 'disabled');
+
+    jQuery('#postSubmit').click(function() {
+        jQuery(this).prop('disabled', true);
+        var data = {
+            title: jQuery('#title').val(),
+            author: jQuery('#author').val(),
+            email: jQuery('#email').val(),
+            tpl: jQuery('#tpl').val(),
+            code: jQuery('#code').val(),
+            pic_id: jQuery('#pic_id').val(),
+            formHash: jQuery('#formHash').val()
+        };
+        if (!data.title || !data.author || !data.tpl || !data.code || !data.pic_id) {
+            jQuery(this).prop('disabled', false);
+            alert('请检查所有必填项');
+            return false;
+        }
+        jQuery.post('/postSubmit', data, function(ret) {
+            if (ret.errno > 0) {
+                alert(ret.errmsg);
+                jQuery('#postSubmit').prop('disabled', false);
+                return false;
+            }
+			jQuery('#submit-tips').html("发布成功！");
+			var redirectUrl = '/view?id=' + ret.result;
+			setTimeout(function() {
+				jQuery('#submit-tips').fadeOut('fast');
+				location.href = redirectUrl;
+			}, 2000);
+        }, 'json');
+    });
+});
+</script>

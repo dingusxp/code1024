@@ -1,0 +1,80 @@
+<!-- content -->
+<div class="wrapper row3">
+  <div id="container">
+    <!-- ################################################################################################ -->
+    <section class="clear">
+      <h1>Code-1024 编程画图秀</h1>
+      <div class="divider2"></div>
+      <h4>介绍</h4>
+      <p>
+          一句话说明：<strong>用有限的代码构建一个1024*1024的颜色矩阵，秀出你的编程&amp;艺术之美</strong>
+      </p>
+      <p>
+        起源于<a href="http://codegolf.stackexchange.com/questions/35569/tweetable-mathematical-art" target="_blank"> stackexchange 上的一个问题</a>，
+        这里稍微做了一下扩展，支持更多编程语言，并放宽了代码长度的限制。
+      </p>
+
+      <div class="divider2"></div>
+      <h4>规则</h4>
+      <p>
+        <b>目标：</b><br />
+        通过实现 模版 中的一个函数 get_color_at(x, y) ，在一个 1024*1024 的画布上画出尽可能 “有意思” 的图案。
+      </p>
+      <p>
+        <b>参数：</b><br />
+        int x, int y ，取值均为 0 - 1023，对应画布上坐标点，左上角为起始点 (0,0)
+      </p>
+      <p>
+        <b>返回：</b><br />
+        int r, int g, int b, int alpha， 对应颜色的 RGBA 分量，均为 0 - 255。
+      </p>
+      <p>
+        <b>注意：</b><br />
+        各语言中 alpha 分量定义可能不同，由 模版 统一转换为： 0 - 255，值越大越透明。
+      </p>
+      <p>
+        <b>要求：</b><br />
+        只能编辑 模版 中 get_color_at(x, y) 函数体内 // {{code start}} - // {{code end}} 间的代码；<br />
+        代码总字符数不能超过 1024 个，且有较好的可读性。
+      </p>
+
+      <div class="divider2"></div>
+      <h4>模版</h4>
+      <p>
+          目前支持模版：
+          <?php foreach ($postTplCfg as $tpl => $cfg) { ?>
+            <?php if (!empty($cfg['download_tpl'])) { ?>
+                  <a href="/download?tpl=<?php echo $tpl;?>" target="_blank"><?php echo $cfg['name'];?></a> &nbsp;&nbsp;
+            <?php } ?>
+          <?php } ?>
+      </p>
+      <p>
+          更多模版支持可以参与 github 项目提交：<a href="https://github.com/dingusxp/code1024">https://github.com/dingusxp/code1024</a>
+      </p>
+
+      <div class="divider2"></div>
+      <h4>参与</h4>
+      <p>
+          <a href="/post" title="投递作品">立即投递作品</a>
+          &nbsp; 或者 &nbsp;
+          <a href="/list" title="作品秀">浏览作品秀</a>
+      </p>
+
+    <?php if ($postList) { ?>
+      <div class="divider2"></div>
+      <h4>本期作品推荐</h4>
+      <!-- ################################################################################################ -->
+      <div id="portfolio">
+      <?php include dirname(__FILE__).'/_post-list.html';?>
+      <nav class="pagination">
+        <ul>
+          <li class="current"><a href="/list">浏览全部</a></li>
+        </ul>
+      </nav>
+      </div>
+    </section>
+    <?php } ?>
+    <!-- ################################################################################################ -->
+    <div class="clear"></div>
+  </div>
+</div>

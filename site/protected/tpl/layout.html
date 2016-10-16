@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:wb=“http://open.weibo.com/wb>
+<head>
+<title>Code-1024 编程画图秀</title>
+<meta charset="utf-8" />
+<meta name="Keywords" content="code1024,编程,画图,编程艺术,HTML,javascript,canvas"/>
+<meta name="Description"
+      content="使用 javascript（canvas），PHP（GD）等编程语言（方式）少于1024个字符在1024*1024画布上绘图；程序员也懂艺术！"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="wb:webmaster" content="c109aad4fb543851" />
+<?php echo isset($extraMeta)?$extraMeta:'';?>
+<link href="/static/styles/main.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/static/styles/mediaqueries.css" rel="stylesheet" type="text/css" media="all" />
+<?php echo isset($extraStyle)?$extraStyle:'';?>
+<!--[if lt IE 9]>
+<link href="/static/styles/ie/ie8.css" rel="stylesheet" type="text/css" media="all">
+<script src="/static/scripts/ie/css3-mediaqueries.min.js"></script>
+<script src="/static/scripts/ie/html5shiv.min.js"></script>
+<![endif]-->
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="wrapper row1">
+  <header id="header" class="full_width clear">
+    <hgroup>
+      <h1><a href="/">Code-1024</a></h1>
+      <h2>编程之美，谁说程序员不懂艺术！</h2>
+    </hgroup>
+    <div id="header-contact">
+      <ul class="list none">
+          <li>
+              <a href="https://github.com/dingusxp/code1024" title="code1024@github" target="_blank">
+                  <span class="fork">&nbsp;</span>
+              </a>
+          </li>
+      </ul>
+    </div>
+  </header>
+</div>
+<!-- ################################################################################################ -->
+<div class="wrapper row2">
+  <nav id="topnav">
+    <ul class="clear">
+      <li<?php if($actionName=="index"){ ?> class="active"<?php } ?>><a href="/" title="首页">首页</a></li>
+      <li<?php if(in_array($actionName, array("list","view"))){ ?> class="active"<?php } ?>><a href="/list" title="作品秀">作品秀</a></li>
+      <li<?php if($actionName=="post"){ ?> class="active"<?php } ?>><a href="/post" title="投递代码">投递代码</a></li>
+    </ul>
+  </nav>
+</div>
+
+<?php echo $mainContent;?>
+
+<!-- Footer -->
+<div class="wrapper row4">
+  <div id="copyright" class="clear">
+    <p class="fl_left">Copyright&copy;Code-1024 - All Rights Reserved</p>
+    <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+  </div>
+</div>
+<!-- Scripts -->
+<script src="/static/scripts/jquery-latest.min.js"></script>
+<script src="/static/scripts/jquery-ui.min.js"></script>
+<script type="text/javascript">jQuery(document).ready(function($){ $('img').removeAttr('width height'); });</script>
+<script src="/static/scripts/jquery-mobilemenu.min.js"></script>
+<script src="/static/scripts/custom.js"></script>
+<?php echo isset($extraScript)?$extraScript:'';?>
+</body>
+</html>

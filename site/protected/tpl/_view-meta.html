@@ -1,0 +1,8 @@
+<!--微博点赞&分享-->
+<meta property="og:type" content="webpage" />
+<meta property="og:url" content="http://code1024.sinaapp.com/view?id=<?php echo $postData['show_id'];?>" />
+<meta property="og:title" content="#编程画图秀# <?php echo HTML::escape($postData['author']);?> 作品 —— <?php echo HTML::escape($postData['title']);?>（代码长度：<?php echo strlen($postData['code']);?> Byte；模版：<?php echo HTML::escape($postData['tpl_name']);?>）" />
+<meta property="og:description" content="<?php echo HTML::escape($postData['author']);?> 在 Code-1024#编程画图秀# 新出了一副作品 <?php echo HTML::escape($postData['title']);?>。快来围观点赞吧~~" />
+<meta property="og:image" content="<?php echo $postData['pic_url'];?>" />
+<meta name="weibo:webpage:create_at" content="<?php echo $postData['create_time'];?>" />
+<!--meta name="weibo:webpage:update_at" content="<?php echo $postData['create_time'];?>" /-->

@@ -1,0 +1,52 @@
+
+<link rel="stylesheet" href="/static/libs/highlight/styles/github.css" type="text/css" media="all" />
+
+        <?php $listIndex = 0;?>
+        <?php foreach ($postList as $postData) { ?>
+        <?php $listIndex++;?>
+    <ul class="clear">
+        <li class="one_half<?php if ($listIndex%2==1) { ?> first<?php } ?>">
+          <article class="clear">
+            <header>
+            </header>
+            <figure class="post-image">
+                <a href="/view?id=<?php echo $postData['show_id'];?>">
+                    <img src="<?php echo $postData['list_url'];?>" alt="<?php echo HTML::escape($postData['title']);?>" />
+                </a>
+            </figure>
+            <footer class="read-more"></footer>
+          </article>
+        </li>
+        <li class="one_half last">
+            <article class="clear">
+            <header>
+              <h2 class="blog-post-title"><a href="/view?id=<?php echo $postData['show_id'];?>"><?php echo HTML::escape($postData['title']);?></a></h2>
+              <div class="blog-post-meta">
+                <ul>
+                    <li class="blog-post-cats">作者：<strong><?php echo HTML::escape($postData['author']);?></strong></li>
+                    <li class="blog-post-cats">模版：<strong><?php echo HTML::escape($postData['tpl_name']);?></strong></li>
+                    <li class="blog-post-cats">长度：<strong><?php echo strlen($postData['code']);?></strong> Byte</li>
+                    <li class="blog-post-date">时间：<strong><?php echo date('Y-m-d', strtotime($postData['create_time']));?></strong></li>
+                    <li class="blog-post-date">查看：<strong><?php echo $postData['view_num'];?></strong> 次</li>
+                </ul>
+              </div>
+            </header>
+            <figure>
+                <pre>
+<code class="javascript">
+<?php echo HTML::escape($postData['code']);?>
+</code>
+                </pre>
+            </figure>
+                <footer class="read-more">
+                    <a href="/view?id=<?php echo $postData['show_id'];?>">评论 »</a>
+                </footer>
+          </article>
+        </li>
+    </ul>
+        <?php } ?>
+
+<script type="text/javascript" src="/static/libs/highlight/highlight.pack.js"></script>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+</script>

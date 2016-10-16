@@ -1,0 +1,10 @@
+/*
+Responsive Template Name: RS-1200 Prototype 2
+File: Custom CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+#header #header-contact .fork{display:block;width:177px;height:41px;margin:-13px 0;text-indent:-1000px;background:transparent url(../images/fork.png) no-repeat;}
+form span.required{color:red;}
