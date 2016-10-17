@@ -50,4 +50,4 @@ int r, int g, int b, int alpha， 对应颜色的 RGBA 分量，均为 0 - 255�
 
 ### 绘图代码提交和展示：
 
-http://code1024.sinaapp.com/
+http://code1024.org/
